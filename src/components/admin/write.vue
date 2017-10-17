@@ -29,7 +29,7 @@ export default {
         return{
             title:'',
             date:'',
-            tag:'',
+            tag:"未分类",
             content:'',
             brief:'',
             msg:'',
@@ -48,7 +48,10 @@ export default {
         savePost:function(){
             let obj = {
                 title: this.title,
-                date: this.date,
+                year:this.date.substring(0,4),
+                month:this.date.substring(5,7),
+                day:this.date.substring(8,10),
+                time:this.date.substring(11,16),
                 tag: this.tag,
                 content: this.content,
                 brief: this.brief,
@@ -64,15 +67,9 @@ export default {
             )
         },
         getTime:function(){
-            //待办 MOMENT.JS
-            let now = new Date()
-            function zero(obj){
-                if(obj<10) return "0"+obj
-                else return obj
-            }
-            let month = now.getMonth() + 1
-            let day = now.getDate()
-            this.date = now.getFullYear() + "-" + zero(month) + "-" + zero(day) + "T" + now.getHours() + ":" + now.getMinutes()
+            let now = this.$format(new Date(),'YYYY-MM-DDTHH:mm')
+            this.date = now
+            console.log(this.$format("-06","M"))
         },
         getTags:function(){
             this.$http.get('/api/getTags').then(

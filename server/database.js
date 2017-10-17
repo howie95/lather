@@ -1,12 +1,15 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise 
-mongoose.connect('mongodb://localhost:27017/lather')
+mongoose.connect('mongodb://localhost:27017/lather',{useMongoClient: true},function(err){
+    if(err){console.log("数据库连接失败！")}
+    else{console.log("数据库连接成功！")}
+})
 
 const postSchem = new mongoose.Schema({
     title: String,
-    year: String,
-    month: String,
-    day: String,
+    year: Number,
+    month: Number,
+    day: Number,
     time: String,
     tag: String,
     brief: String,
@@ -18,8 +21,8 @@ const idsSchem = new mongoose.Schema({
     id: Number,
 })
 const dateSchem = new mongoose.Schema({
-    year: String,
-    month: String,
+    year: Number,
+    month: Number,
     article: Number,
 })
 
