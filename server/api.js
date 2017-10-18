@@ -14,14 +14,14 @@ router.get('/api/getTags', function (req, res) {
 })
 //索引文章
 router.get('/api/getList', function (req, res) {
-    let year = req.query.year
-    let month = req.query.month
+    let year = parseInt(req.query.year)
+    let month = parseInt(req.query.month)
     let tag = req.query.tag
     let list
     console.log(tag)
     if(tag!==""){
         list = db.posts.find({tag:tag},{brief:0,content:0}).sort({year:-1,month:-1,day:-1})
-    }else if(month!==""){
+    }else if(month){
         list = db.posts.find({year:year,month:month},{brief:0,content:0}).sort({day:-1})
     }else{
         list = db.posts.find({year:year},{brief:0,content:0}).sort({month:-1,day:-1})

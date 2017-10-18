@@ -1,16 +1,25 @@
 <template>
     <main>
-        <section v-for="item in lists" :key="item.year">
-            <router-link :to='{ path: `/blog/date/${item.year}` }'>{{item.year}}年：</router-link>
+        <div class="maintitle date">
+            <div class="maintitleh1">
+                <h1>日期索引</h1>
+            </div>
+        </div>
+        <div class="datecontent">
+            <section v-for="item in lists" :key="item.year">
+            <router-link :to='{ path: `/blog/date/${item.year}` }' class="yeara">{{item.year}}年：</router-link>
             <ul>
                 <li v-for="item in item.months" :key="item.month">
-                <router-link :to='{ path: `/blog/date/${item.year}/${item.month}` }'>{{item.yuefen}}</router-link><span>({{item.article}})</span>
+                <router-link :to='{ path: `/blog/date/${item.year}/${item.month}` }'>{{item.yuefen}}</router-link><span>(共 {{item.article}} 篇)</span>
                 </li>
             </ul>
-        </section>
+            </section>
+        </div>
+        <main-footer></main-footer>
     </main>
 </template>
 <script>
+import mainFooter from './footer'
 export default {
       data(){
           return{
@@ -33,7 +42,10 @@ export default {
             },
             response => console.error(response)
         )
-    }
+    },
+    components:{
+        mainFooter
+    },
 }
 </script>
 

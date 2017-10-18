@@ -69,7 +69,6 @@ export default {
         getTime:function(){
             let now = this.$format(new Date(),'YYYY-MM-DDTHH:mm')
             this.date = now
-            console.log(this.$format("-06","M"))
         },
         getTags:function(){
             this.$http.get('/api/getTags').then(

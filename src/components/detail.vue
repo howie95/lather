@@ -1,36 +1,46 @@
 <template>
     <main>
-        <article>
+        <div class="maintitle detail">
+            <div class="maintitleh1">
+                <h1>{{item.title}}</h1>
+            </div>
+        </div>
+        <article class="detailcontent">
             <div class="titleline">
-                <h2>{{item.title}}</h2>
+                <h2>发表于 {{item.year}}年{{item.month}}月{{item.day}}日{{item.time}}</h2>
                 <div class="column">
-                    <ul>
-                        <li>{{item.tag}}</li>
-                    </ul>
-                    <span>{{item.date}}</span>
+                    <span>{{item.tag}}</span>
                 </div>
             </div>
             <div class="content">
                 <p>{{item.content}}</p>
             </div>
         </article>
+        <main-footer></main-footer>
     </main>  
 </template>
 <script>
+import mainFooter from './footer'
 export default {
-      data(){
-          return{
-              item:{}
-          }
-      },
-      mounted(){
-          let param = {postId:this.$route.params.id}
-          this.$http.get('/api/getPosts',{params:param}).then(
-              //待办：if response.data.length == 0 404
-            response => this.item = response.data[0],
-            response => console.error(response)
-            )
-      }
+    data(){
+        return{
+            item:{}
+        }
+    },
+    mounted(){
+        let param = {postId:this.$route.params.id}
+        this.$http.get('/api/getPosts',{params:param}).then(
+            //待办：if response.data.length == 0 404
+        response => {
+            this.item = response.data[0]
+            this.item.time = this.$format("1111-11-11T"+this.item.time,'Ahh:mm',{locale: this.$zhcn})
+        },
+        response => console.error(response)
+        )
+    },
+    components:{
+        mainFooter
+    },
 }
 </script>
 

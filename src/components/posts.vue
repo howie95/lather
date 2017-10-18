@@ -1,33 +1,47 @@
 <template>
-    <main>
-        <article v-for="(item,index) in posts" :key="item._id">
-            <div class="titleline">
-                <h2>{{item.title}}</h2>
-                <div class="column">
-                    <ul>
-                        <li>{{item.tag}}</li>
-                    </ul>
-                    <span>{{item.year}}</span>
-                    <span>{{item.month}}</span>
-                    <span>{{item.day}}</span>
+    <div>
+        <transition name="posts">
+        <main v-if="!welcome">
+            <div class="maintitle posts">
+                <div class="maintitleh1">
+                    <h1>全部博文</h1>
+                    <span>第 {{this.$route.params.page}} 页</span>
                 </div>
             </div>
-            <div class="content">
-                <p>{{item.brief}}</p>
+            <div class="maincontent">
+                <article v-for="(item,index) in posts" :key="item._id">
+                    <div class="titleline">
+                        <h2>{{item.title}}</h2>
+                        <div class="column">
+                            <span>{{item.tag}}</span>
+                            <span>{{item.year}}年</span>
+                            <span>{{item.month}}月</span>
+                            <span>{{item.day}}日</span>
+                            <span>{{item.time}}</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>{{item.brief}}</p>
+                    </div>
+                    <div class="showmore">
+                        <span class="showmoreb" @click="more(index)" v-if="item.nobrief=='collapse'">阅读全文&or;</span>
+                        <span class="showmoreb" @click="more(index)" v-if="item.nobrief=='extend'">收起&and;</span>
+                        <span v-if="item.nobrief == 'true'">- 以上是全部内容 -</span>
+                    </div>
+                </article>
+                <div class="flicker">
+                    <router-link class="flickbefore" :to="{ name: 'page', params: { page: page-1 }}" @click.native="toTop" v-if="!start">前一页</router-link>
+                    <router-link class="flicknext" :to="{ name: 'page', params: { page: page+1 }}" @click.native="toTop" v-if="!end">后一页</router-link>
+                </div>
             </div>
-            <div class="showmore">
-                <span @click="more(index)" v-if="item.nobrief=='collapse'">阅读全文</span>
-                <span @click="more(index)" v-if="item.nobrief=='extend'">收起</span>
-                <span v-if="item.nobrief == 'true'">- 以上是全部内容 -</span>
-            </div>
-        </article>
-        <div>
-            <router-link :to="{ name: 'page', params: { page: page-1 }}" v-if="!start">前一页</router-link>
-            <router-link :to="{ name: 'page', params: { page: page+1 }}" v-if="!end">后一页</router-link>
-        </div>
-    </main>
+            <main-footer></main-footer>
+        </main>
+        </transition>
+        <div></div>
+    </div>
 </template>
 <script>
+import mainFooter from './footer'
 export default {
     name:'blog',
     data(){
@@ -39,6 +53,7 @@ export default {
             end:false,
         }
     },
+    props: ['welcome'],
     methods:{
         getPosts(){
             let param = {
@@ -51,6 +66,7 @@ export default {
             if(response.data.length==6){this.end = false}
             if(response.data.length<6){this.end = true}
             for (let item in this.posts){
+                this.posts[item].time = this.$format("1111-11-11T"+this.posts[item].time,'Ahh:mm',{locale: this.$zhcn})
                 if(this.posts[item].brief == this.posts[item].content ||this.posts[item].brief==""){
                     this.posts[item].brief = this.posts[item].content
                     this.posts[item].nobrief = "true"
@@ -75,7 +91,26 @@ export default {
                 this.posts[e].brief = this.posts[e].briefcopy
                 this.posts[e].nobrief = "collapse"
             }
-        }
+        },
+        toTop(){
+            document.body.scrollTop = 0
+            document.documentElement.scrollTop = 0
+        },
+        smoothTop(){
+            let distance = document.documentElement.scrollTop || document.body.scrollTop
+            let step = distance / 50
+            function scrollUp(){
+                if (distance > 0){
+                    distance -= step
+                    document.body.scrollTop = distance
+                    document.documentElement.scrollTop = distance
+                    setTimeout(scrollUp, 10)
+                } else {
+                    return
+                }
+            }
+            scrollUp()
+        },
     },
     mounted(){
         if(this.$route.params.page){this.page=parseInt(this.$route.params.page)}
@@ -87,7 +122,10 @@ export default {
         '$route' (to, from) {
             this.switchPage(to.params.page)
         }
-    }
+    },
+    components:{
+        mainFooter
+    },
 }
 </script>
 
