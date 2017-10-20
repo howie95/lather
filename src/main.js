@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import Axios from 'axios'
 import Format from 'date-fns/format'
 import zhcn from 'date-fns/locale/zh_cn'
+import mavonEditor from 'mavon-editor'
 import App from './App'
-import ti from'./components/typingit'
+//import ti from'./components/typingit'
 
 //import index from './components/index'
 import posts from './components/posts'
@@ -14,8 +15,9 @@ import date from './components/date'
 import tags from './components/tags'
 import write from './components/admin/write'
 
-Vue.use(ti)
+//Vue.use(ti)
 Vue.use(Router)
+Vue.use(mavonEditor)
 Vue.prototype.$http = Axios
 Vue.prototype.$format = Format
 Vue.prototype.$zhcn = zhcn

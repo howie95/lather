@@ -25,6 +25,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader?name=fonts/[name].[md5:hash:hex:7].[ext]',
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {

@@ -285,6 +285,9 @@ main{
 .detail{
     background-image: linear-gradient(-225deg, #CBBACC 0%, #2580B3 100%);
 }
+.write{
+    background-image: linear-gradient(-225deg, #CBBACC 0%, #2580B3 100%);
+}
 .maintitleh1{
     width: 1000px;
     height: 150px;
@@ -532,6 +535,18 @@ article{
     width: 800px;
     margin: 10px auto;
     border-radius: 0;
+}
+/* WRITE */
+.upload {
+    width: 800px;
+    margin: 10px auto;
+    padding: 50px 50px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.1);
+}
+.upload h3 {
+    font-size: 20px;
 }
 /* FOOTER */
 footer .footersd {

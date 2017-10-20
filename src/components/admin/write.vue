@@ -1,19 +1,24 @@
 <template>
     <main>
+        <div class="maintitle write">
+            <div class="maintitleh1">
+                <h1>撰写博文</h1>
+            </div>
+        </div>
         <div class="upload">
             <form>
-                <h3>标题:</h3>
+                <h3>文章标题:</h3>
                 <input type="text" name="title" v-model="title"><br>
-                <h3>日期:</h3>
+                <h3>录入日期:</h3>
                 <input type="datetime-local" name="date" v-model="date"><input type="button" value="获取当前时间" @click="this.getTime"><br>
-                <h3>分类:</h3>
+                <h3>博文分类:</h3>
                 <select name="tag" v-model="tag" v-if="!newTag">
                     <option v-for="item in tags" :key="item._id" :value="item.tag">{{item.tag}}</option>
                 </select>
                 <input type="text" name="newtag" v-model="tag" v-if="newTag">
                 <input type="button" :value="newTagtext" @click="this.newTags"><br>
-                <h3>内容:</h3>
-                <input type="text" name="content" v-model="content"><br>
+                <h3>文章内容:</h3>
+                <mavon-editor v-model="content"/>
                 <h3>简介:</h3>
                 <input type="text" name="brief" v-model="brief"><br>
             </form>
@@ -83,4 +88,5 @@ export default {
     }
 }
 </script>
-
+<style src="./../../assets/font/css/fontello.css">
+</style>
