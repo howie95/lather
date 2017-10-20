@@ -30,8 +30,8 @@
                     </div>
                 </article>
                 <div class="flicker">
-                    <router-link class="flickbefore" :to="{ name: 'page', params: { page: page-1 }}" @click.native="toTop" v-if="!start">前一页</router-link>
-                    <router-link class="flicknext" :to="{ name: 'page', params: { page: page+1 }}" @click.native="toTop" v-if="!end">后一页</router-link>
+                    <router-link class="flickbefore" :to="{ name: 'page', params: { page: page-1 }}" v-if="!start">前一页</router-link>
+                    <router-link class="flicknext" :to="{ name: 'page', params: { page: page+1 }}" v-if="!end">后一页</router-link>
                 </div>
             </div>
             <main-footer></main-footer>

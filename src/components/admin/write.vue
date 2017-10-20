@@ -63,15 +63,25 @@ export default {
                 content: this.content,
                 brief: this.brief,
             }
-            this.$http.post('/api/savePost',obj).then(
-                response => {
-                this.msg = "保存成功！"
-                },
-                response => {
-                this.msg = "保存失败！"
-                console.log(response)
-                }
-            )
+            if(this.$route.params.id){
+                this.$http.post('/api/editPost',obj).then(
+                    response => {
+                    this.msg = "保存成功！"
+                    },
+                    response => {
+                    this.msg = "保存失败！"
+                    }
+                )
+            }else{
+                this.$http.post('/api/savePost',obj).then(
+                    response => {
+                    this.msg = "保存成功！"
+                    },
+                    response => {
+                    this.msg = "保存失败！"
+                    }
+                )
+            }
         },
         getTime:function(){
             let now = this.$format(new Date(),'YYYY-MM-DDTHH:mm')
@@ -85,8 +95,23 @@ export default {
         }
     },
     mounted(){
-        this.getTime()
         this.getTags()
+        if(this.$route.params.id){
+            let param = {postId:this.$route.params.id}
+            this.$http.get('/api/getPosts',{params:param}).then(
+            response => {
+                let time = response.data[0].year + ',' + response.data[0].month + ',' + response.data[0].day + ',' + response.data[0].time
+                this.title = response.data[0].title
+                this.date = this.$format(time,'YYYY-MM-DDTHH:mm')
+                this.tag = response.data[0].tag
+                this.content = response.data[0].content
+                this.brief = response.data[0].brief
+            },
+            response => console.error("服务器异常")
+            )
+            return
+        }
+        this.getTime()
     },
     components:{
         mainFooter

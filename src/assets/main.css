@@ -311,6 +311,7 @@ main{
 .maincontent{
     position: relative;
     width: 800px;
+    min-height: 800px;
     margin: 0 auto;
     padding-bottom: 50px;
 }
@@ -592,11 +593,62 @@ article{
 /* ADMIN */
 .admincontent {
     width: 800px;
-    margin: 10px auto;
+    margin: 50px auto;
+    padding: 20px 30px;
     border-radius: 5px;
     background-color: white;
     box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.1);
     min-height: 500px;
+}
+.admincontent h2 {
+    color: #426988;
+}
+.admincontent ul {
+    padding: 0 30px;
+}
+.admincontent ul li {
+    list-style: none;
+    margin: 40px 0;
+    padding: 20px 0;
+    border-bottom: 1px solid #d6d6d6;
+}
+.admincontent ul li h3 {
+    color: #426988;
+    font-size: 20px;
+    line-height: 40px;
+    left: 10px;
+    margin: 0 ;
+}
+.admincontent ul li span {
+    text-align: center;
+    line-height: 20px;
+    font-size: 13px;
+    color: #4f7da1;
+}
+.admincontent ul li .tag {
+    display: inline-block;
+    height: 20px;
+    width: 50px;
+    color: white;
+    background-color: #6993b5;
+    border-radius: 5px;
+}
+.admincontent ul li a {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 10px;
+    text-align: center;
+    height: 25px;
+    width: 55px;
+    color: white;
+    background-color: #e35e5e;
+    border-radius: 5px;
+}
+.admincontent ul li a:first-child{
+    background-color: #6993b5;
+}
+.admincontent ul li div {
+    float: right;
 }
 
 /* FOOTER */
@@ -634,6 +686,12 @@ footer .howie .hh{
     fill: none;
     stroke: #a0adb7;
     stroke-width: 7px;
+}
+.totop {
+    width: 40px;
+    position: fixed;
+    bottom: 250px;
+    right: 270px;
 }
 
 /* LOGIN */

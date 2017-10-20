@@ -84,6 +84,21 @@ router.get('/api/getPosts', function (req, res) {
         res.json(docs)
     })
 })
+//获取文章列表
+router.get('/api/getPostslist', function (req, res) {
+    let page = parseInt(req.query.page)
+    let pieces = parseInt(req.query.pieces)
+    let skips = (page-1)*pieces
+    let getPostslist
+    postslist = db.posts.find({},{brief:0,content:0}).sort({year:-1,month:-1,day:-1}).skip(skips).limit(pieces)
+    postslist.exec(function (err, docs) {
+        if (err) {
+          console.error(err)
+          return
+        }
+        res.json(docs)
+    })
+})
 //保存文章
 router.post('/api/savePost', function (req, res){
     //啊    回调地狱
@@ -128,6 +143,7 @@ router.post('/api/savePost', function (req, res){
         }) 
     })
 })
+//编辑文章
 //管理员登陆
 router.post('/api/logIn',function (req, res) {
     db.admins.findOne(req.body,function(err,doc){
