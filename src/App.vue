@@ -4,10 +4,15 @@
         <transition name="routerv">
         <router-view :welcome="welcome" @routerchange="smoothTop"></router-view>
         </transition>
+        <transition name="login">
+        <login></login>
+        </transition>
     </div>
 </template>
 
 <script>
+import le from './components/loginevent'
+import login from './components/login'
 import mainHeader from './components/header'
 export default {
     name: 'app',
@@ -18,6 +23,7 @@ export default {
         }
     },
     components:{
+        login,
         mainHeader
     },
     methods:{
@@ -72,6 +78,9 @@ export default {
         }
         if(this.$route.fullPath=="/"||this.$route.fullPath==""){
             this.index=true
+        }
+        if (document.cookie.match("admin")){
+            le.$emit('islogin')
         }
         })
     }

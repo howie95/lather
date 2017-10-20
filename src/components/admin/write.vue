@@ -8,26 +8,28 @@
         <div class="upload">
             <form>
                 <h3>文章标题:</h3>
-                <input type="text" name="title" v-model="title"><br>
+                <input class="titleinput" type="text" name="title" v-model="title">
                 <h3>录入日期:</h3>
-                <input type="datetime-local" name="date" v-model="date"><input type="button" value="获取当前时间" @click="this.getTime"><br>
+                <input class="dateinput" type="datetime-local" name="date" v-model="date"><input class="button1" type="button" value="获取当前时间" @click="this.getTime">
                 <h3>博文分类:</h3>
-                <select name="tag" v-model="tag" v-if="!newTag">
+                <select class="taginput" name="tag" v-model="tag" v-if="!newTag">
                     <option v-for="item in tags" :key="item._id" :value="item.tag">{{item.tag}}</option>
                 </select>
-                <input type="text" name="newtag" v-model="tag" v-if="newTag">
-                <input type="button" :value="newTagtext" @click="this.newTags"><br>
+                <input class="taginput" type="text" name="newtag" v-model="tag" v-if="newTag">
+                <input class="button1" type="button" :value="newTagtext" @click="this.newTags">
                 <h3>文章内容:</h3>
-                <mavon-editor v-model="content"/>
+                <mavon-editor :subfield="false" v-model="content"/>
                 <h3>简介:</h3>
-                <input type="text" name="brief" v-model="brief"><br>
+                <textarea class="briefinput" name="brief" v-model="brief"></textarea>
             </form>
-            <button @click="savePost">保存</button>
+            <button class="savebutton" @click="savePost">保存</button>
             <h3>{{msg}}</h3>
         </div>
+        <main-footer></main-footer>
     </main>
 </template>
 <script>
+import mainFooter from './../footer'
 export default {
     name:'wretePost',
     data(){
@@ -85,8 +87,11 @@ export default {
     mounted(){
         this.getTime()
         this.getTags()
-    }
+    },
+    components:{
+        mainFooter
+    },
 }
 </script>
-<style src="./../../assets/font/css/fontello.css">
+<style src='mavon-editor/dist/css/index.css'>
 </style>

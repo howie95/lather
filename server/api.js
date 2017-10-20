@@ -128,5 +128,42 @@ router.post('/api/savePost', function (req, res){
         }) 
     })
 })
+//管理员登陆
+router.post('/api/logIn',function (req, res) {
+    db.admins.findOne(req.body,function(err,doc){
+        if(err){
+            res.json({
+            status:"1",
+            })
+        }else{
+            if(doc){
+            res.cookie("admin",doc.name,{
+                path:'/',
+                maxAge:1000*60*60*2
+            })
+            res.json({
+                status:"0",
+                result:{
+                name:doc.name,
+                }
+            })
+            }else{
+            res.json({
+                status:"2",
+            })
+            }
+        }
+    })
+})
+//管理员登出
+router.post('/api/logout',function (req, res) {
+    res.cookie("admin","",{
+      path:'/',
+      maxAge:-1
+    })
+    res.json({
+      status:"0"
+    })
+  })
 
 module.exports = router

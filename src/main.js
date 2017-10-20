@@ -14,6 +14,7 @@ import detail from './components/detail'
 import date from './components/date'
 import tags from './components/tags'
 import write from './components/admin/write'
+import adminlist from './components/admin/list'
 
 //Vue.use(ti)
 Vue.use(Router)
@@ -34,7 +35,9 @@ const router = new Router({
     {path: '/blog/date/:year/:month', component: list},
     {path: '/blog/tags/', component: tags},
     {path: '/blog/tags/:tag', component: list},
-    {path: '/blog/admin/new', component: write}
+    {path: '/blog/admin/new', component: write},
+    {path: '/blog/admin/edit/:id', component: write},
+    {path: '/blog/admin/list', component: adminlist}
   ]
 })
 

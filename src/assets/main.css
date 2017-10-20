@@ -229,15 +229,6 @@ header{
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
     background-color: white;
 }
-.logobar .howie{
-    width: 100px;
-    padding-top: 10px;
-}
-.logobar .howie .hh{
-    fill: none;
-    stroke: #a0adb7;
-    stroke-width: 7px;
-}
 .logobar .barcontent {
     display: flex;
     justify-content: space-between;
@@ -245,15 +236,12 @@ header{
     width: 1000px;
     margin: 0 auto;
 }
-.logobar .barcontent nav{
-    margin: 0;
-    display: inline-block;
-}
-.logobar .barcontent nav a{
+.logobar .barcontent a{
+    text-decoration: none;
     line-height: 50px;
     color: #a0adb7;
 }
-.logobar .barcontent nav span{
+.logobar .barcontent span{
     line-height: 50px;
     margin: 0 10px;
     color: #bfc7ce;
@@ -287,6 +275,9 @@ main{
 }
 .write{
     background-image: linear-gradient(-225deg, #CBBACC 0%, #2580B3 100%);
+}
+.admin{
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 }
 .maintitleh1{
     width: 1000px;
@@ -539,16 +530,79 @@ article{
 /* WRITE */
 .upload {
     width: 800px;
-    margin: 10px auto;
+    margin: 20px auto;
     padding: 50px 50px;
     border-radius: 5px;
     background-color: white;
     box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.1);
 }
 .upload h3 {
+    color: #517d97;
     font-size: 20px;
+    margin-top: 30px;
 }
+.upload .button1 {
+    cursor: pointer;
+    height: 30px;
+    margin-left: 5px;
+    color: white;
+    background-color: #94a7c4;
+    border: none;
+    box-shadow: 0 0px 4px rgba(0,0,0,0.157), 0 0px 4px rgba(0,0,0,0.227);
+}
+.upload .savebutton {
+    cursor: pointer;
+    height: 50px;
+    width: 150px;
+    margin-top: 50px;
+    color: white;
+    background-color: #6fd093;
+    border: none;
+    box-shadow: 0 0px 4px rgba(0,0,0,0.157), 0 0px 4px rgba(0,0,0,0.227);
+}
+.titleinput,.dateinput,.taginput,.briefinput {
+    border: none;
+    padding: 0 10px;
+    box-shadow: 0 0px 4px rgba(0,0,0,0.157), 0 0px 4px rgba(0,0,0,0.227);
+}
+.titleinput {
+    height: 35px;
+    min-width: 300px;
+    max-width: 700px;
+    font-size: 15px;
+}
+.dateinput {
+    height: 30px;
+    width: 200px;
+}
+.taginput {
+    height: 30px;
+    width: 150px;
+}
+.briefinput {
+    padding-top: 10px;
+    min-height: 100px;
+    width: 780px;
+    max-width: 780px;
+}
+.upload .v-note-wrapper {
+    z-index: 997;
+    height: 500px;
+}
+/* ADMIN */
+.admincontent {
+    width: 800px;
+    margin: 10px auto;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.1);
+    min-height: 500px;
+}
+
 /* FOOTER */
+footer {
+    position: relative;
+}
 footer .footersd {
     width: 100%;
     height: 1px;
@@ -563,4 +617,105 @@ footer .footerbg {
 @keyframes huerotate{
     from{filter: hue-rotate(0)}
     to{filter: hue-rotate(360deg)}
+}
+footer .footerct {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 1000px;
+    margin: 0 auto;
+}
+footer .howie{
+    width: 100px;
+    padding-top: 10px;
+}
+footer .howie .hh{
+    fill: none;
+    stroke: #a0adb7;
+    stroke-width: 7px;
+}
+
+/* LOGIN */
+.login {
+    display: block;
+    position: fixed;
+    right: 0;
+    bottom: 100px;
+    width: 350px;
+    height: 200px;
+}
+.loginbox {
+    display: block;
+    width: 250px;
+    height: 170px;
+    margin: 10px auto;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+}
+.loginbox p {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    margin:  0;
+    text-align: center;
+    background-color: #7490a7;
+    color: white;
+}
+.loginbox input {
+    display: block;
+    border: none;
+    padding: 0 10px;
+    width: 250px;
+    height: 30px;
+    margin: 10px auto;
+    box-shadow: 0 0px 4px rgba(0,0,0,0.157), 0 0px 4px rgba(0,0,0,0.227);
+}
+.loginbox button {
+    cursor: pointer;
+    height: 40px;
+    width: 250px;
+    border: none;
+    color: white;
+    background-color: #7cacd4;
+}
+.logtip {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 70px;
+    display: block;
+    width: 250px;
+    height: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    animation: logtip .5s ease-out 2s forwards;
+}
+@keyframes logtip {
+    to{
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+.logtip p {
+    display: block;
+    margin: 0;
+    color: #77bc8d;
+    text-align: center;
+    line-height: 50px;
+}
+.login-enter-active,.login-leave-active{
+    transition: all .5s;
+  }
+.login-leave-to{
+    transform: translateY(-100%);
+    opacity: 0;
+}
+.login-enter{
+    transform: translateY(100%);
+    opacity: 0;
 }
