@@ -421,9 +421,28 @@ article{
 }
 .content h1 {
     font-size: 22px;
+    color: #7a91ac;
 }
 .content h2 {
     font-size: 20px;
+    color: #7a91ac;
+}
+.content h2::before,.content h3::before {
+    content: "#";
+    display: inline-block;
+    margin-right: 5px;
+    color: #e990a7;
+}
+.content a {
+    color: #e990a7;
+}
+.content hr {
+    margin: 50px 0;
+    background-color: #abb4bc;
+    border: none;
+    height: 4px;
+    border-radius: 2px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
 }
 .content p {
     color: #5d7a9f;
@@ -432,6 +451,35 @@ article{
     letter-spacing:1px;
     margin: 0;
     padding: 10px 20px;
+}
+.content table {
+    display: block;
+    width: 95%;
+    margin: 20px auto;
+    background-color: #dce6ed;
+    color: #6f598a;
+    border-radius: 10px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.content thead,.content tbody{
+    display: block;
+    width: 100%;
+}
+.content thead {
+    background-color: #abc4d4;
+    height: 40px;
+    line-height: 40px;
+}
+.content tr {
+    display: flex;
+    height: 35px;
+    line-height: 35px;
+    justify-content: space-between;
+    width: 100%;
+}
+.content tr:nth-child(even){
+    background-color: #eef5fa;
 }
 .showmore{
     width: 750px;
