@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <main-header :welcome="welcome" v-if="!index" @navcheck="navcheck"></main-header>
-        <transition name="routerv">
+        <transition :name="routerv">
         <router-view :welcome="welcome" @routerchange="smoothTop"></router-view>
         </transition>
         <transition name="login">
@@ -41,6 +41,7 @@ export default {
     name: 'app',
     data () {
         return {
+            routerv:'routerright',
             istop:true,
             index:false,
             welcome:false,
@@ -127,6 +128,18 @@ export default {
     watch: {
         '$route' (to, from) {
             this.toTop()
+            let toname = to.path
+            let fromname = from.path
+            if(toname.indexOf('page')!==-1){toname=1}
+            else if(toname.indexOf('tag')!==-1){toname=2}
+            else if(toname.indexOf('date')!==-1){toname=3}
+            else if(toname.indexOf('admin')!==-1){toname=4}
+            if(fromname.indexOf('page')!==-1){fromname=1}
+            else if(fromname.indexOf('tag')!==-1){fromname=2}
+            else if(fromname.indexOf('date')!==-1){fromname=3}
+            else if(fromname.indexOf('admin')!==-1){fromname=4}
+            this.routerv = toname < fromname ? 'routerleft' : 'routerright'
+
         }
     },
 }

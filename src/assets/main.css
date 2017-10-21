@@ -33,15 +33,23 @@ header{
     transform: translateY(30%);
     opacity: 0;
 }
-.routerv-enter-active,.routerv-leave-active{
+.routerright-enter-active,.routerright-leave-active,.routerleft-enter-active,.routerleft-leave-active{
     transition: all 1s;
 }
-.routerv-enter{
+.routerright-enter{
     transform: translateX(100%);
     opacity: 0;
 }
-.routerv-leave-to{
+.routerright-leave-to{
     transform: translateX(-100%);
+    opacity: 0;
+}
+.routerleft-enter{
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.routerleft-leave-to{
+    transform: translateX(100%);
     opacity: 0;
 }
 .logobar-enter-active{
@@ -380,6 +388,7 @@ article{
 .content{
     width: 750px;
     margin: 0 auto;
+    padding: 20px 0;
     background-image: linear-gradient(to bottom, #fdfbfb 70%, #f8f9fa 100%);
     border-radius: 5px;
 }
@@ -663,12 +672,7 @@ footer .footersd {
 footer .footerbg {
     width: 100%;
     height: 100px;
-    background-image: linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%);
-    animation: huerotate 4s linear infinite;
-}
-@keyframes huerotate{
-    from{filter: hue-rotate(0)}
-    to{filter: hue-rotate(360deg)}
+    background-color: #e5e5e5;
 }
 footer .footerct {
     position: absolute;
@@ -688,9 +692,10 @@ footer .howie .hh{
     stroke-width: 7px;
 }
 .totop {
+    cursor: pointer;
     width: 40px;
     position: fixed;
-    bottom: 250px;
+    bottom: 200px;
     right: 270px;
 }
 

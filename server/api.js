@@ -18,7 +18,6 @@ router.get('/api/getList', function (req, res) {
     let month = parseInt(req.query.month)
     let tag = req.query.tag
     let list
-    console.log(tag)
     if(tag!==""){
         list = db.posts.find({tag:tag},{brief:0,content:0}).sort({year:-1,month:-1,day:-1})
     }else if(month){

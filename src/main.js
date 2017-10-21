@@ -4,6 +4,8 @@ import Axios from 'axios'
 import Format from 'date-fns/format'
 import zhcn from 'date-fns/locale/zh_cn'
 import mavonEditor from 'mavon-editor'
+import markdown from 'markdown-it'
+import hljs from 'highlight.js'
 import App from './App'
 //import ti from'./components/typingit'
 
@@ -22,6 +24,18 @@ Vue.use(mavonEditor)
 Vue.prototype.$http = Axios
 Vue.prototype.$format = Format
 Vue.prototype.$zhcn = zhcn
+Vue.prototype.$md = new markdown({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><span class="hltitle">'+ lang +'</span><code>' +
+               hljs.highlight(lang, str, true).value +
+               '</code></pre>';
+      } catch (__) {}
+    }
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+  }
+})
 
 const router = new Router({
   mode: 'history',

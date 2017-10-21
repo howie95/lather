@@ -12,9 +12,7 @@
                     <span>{{item.tag}}</span>
                 </div>
             </div>
-            <div class="content">
-                <p>{{item.content}}</p>
-            </div>
+            <div class="content" v-html="item.content"></div>
         </article>
         <main-footer></main-footer>
     </main>  
@@ -33,6 +31,7 @@ export default {
             //待办：if response.data.length == 0 404
         response => {
             this.item = response.data[0]
+            this.item.content = this.$md.render(this.item.content)
             this.item.time = this.$format("1111-11-11T"+this.item.time,'Ahh:mm',{locale: this.$zhcn})
         },
         response => console.error(response)
@@ -43,4 +42,5 @@ export default {
     },
 }
 </script>
-
+<style src="./../assets/highlight.css">
+</style>

@@ -20,8 +20,7 @@
                             <span>{{item.time}}</span>
                         </div>
                     </div>
-                    <div class="content">
-                        <p>{{item.brief}}</p>
+                    <div class="content" v-html="item.brief">
                     </div>
                     <div class="showmore">
                         <span class="showmoreb" @click="more(index)" v-if="item.nobrief=='collapse'">阅读全文&or;</span>
@@ -66,8 +65,10 @@ export default {
             if(response.data.length==6){this.end = false}
             if(response.data.length<6){this.end = true}
             for (let item in this.posts){
+                this.posts[item].brief = this.$md.render(this.posts[item].brief)
+                this.posts[item].content = this.$md.render(this.posts[item].content)
                 this.posts[item].time = this.$format("1111-11-11T"+this.posts[item].time,'Ahh:mm',{locale: this.$zhcn})
-                if(this.posts[item].brief == this.posts[item].content ||this.posts[item].brief==""){
+                if(this.posts[item].brief==""){
                     this.posts[item].brief = this.posts[item].content
                     this.posts[item].nobrief = "true"
                 }else{this.posts[item].nobrief = "collapse"}
@@ -128,4 +129,5 @@ export default {
     },
 }
 </script>
-
+<style src="./../assets/highlight.css">
+</style>
