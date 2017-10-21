@@ -28,6 +28,7 @@ const dateSchem = new mongoose.Schema({
 
 const tagSchem = new mongoose.Schema({
     tag: String,
+    article: Number,
 })
 
 const adminUser = new mongoose.Schema({

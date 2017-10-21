@@ -34,6 +34,7 @@ export default {
     name:'wretePost',
     data(){
         return{
+            dbid:'',
             title:'',
             date:'',
             tag:"未分类",
@@ -64,6 +65,7 @@ export default {
                 brief: this.brief,
             }
             if(this.$route.params.id){
+                obj._id = this.dbid
                 this.$http.post('/api/editPost',obj).then(
                     response => {
                     this.msg = "保存成功！"
@@ -106,6 +108,7 @@ export default {
                 this.tag = response.data[0].tag
                 this.content = response.data[0].content
                 this.brief = response.data[0].brief
+                this.dbid = response.data[0]._id
             },
             response => console.error("服务器异常")
             )

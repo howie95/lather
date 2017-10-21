@@ -144,6 +144,76 @@ router.post('/api/savePost', function (req, res){
     })
 })
 //编辑文章
+router.post('/api/editPost', function (req, res){
+    let obj = req.body
+    obj.year = parseInt(obj.year)
+    obj.month = parseInt(obj.month)
+    obj.day = parseInt(obj.day)
+    db.posts.find({_id:obj._id},function(err,docs){
+        if(err){
+          res.status(500).send()
+          return
+        }
+        if(obj.year!==docs[0].year||obj.month!==docs[0].month){
+            obj.oldyear = docs[0].year
+            obj.oldmonth = docs[0].month
+        }
+        if(obj.tag!==docs[0].tag){
+            obj.oldtag = docs[0].tag
+        }
+        dateChange(obj,res)
+    })
+})
+    //时间改变处理
+    function dateChange(obj,res){
+        if(obj.oldyear){
+            db.date.find({year:obj.oldyear,month:obj.oldmonth},function(err,docs){
+                docs[0].article=docs[0].article-1
+                db.date(docs[0]).save()
+                db.date.find({year:obj.year,month:obj.month},function(err,docs){
+                    if(docs.length==0){
+                        db.date({year:obj.year,month:obj.month,article:1}).save()
+                    }else{
+                        docs[0].article=docs[0].article+1
+                        db.date(docs[0]).save()
+                    }
+                    delete obj.oldyear
+                    delete obj.oldmonth
+                    tagChange(obj,res)
+                })
+            })
+        }else{tagChange(obj,res)}
+    }
+    //分类改变处理
+    function tagChange(obj,res){
+        if(obj.oldtag){
+            db.tags.find({tag:obj.oldtag},function(err,docs){
+                docs[0].article=docs[0].article-1
+                db.tags(docs[0]).save()
+                db.tags.find({tag:obj.tag},function(err,docs){
+                    if(docs.length==0){
+                        db.tags({tag:obj.tag,article:1}).save()
+                    }else{
+                        docs[0].article=docs[0].article+1
+                        db.tags(docs[0]).save()
+                    }
+                    delete obj.oldtag
+                    saveEdit(obj,res)
+                })
+            })
+        }else{saveEdit(obj,res)}
+    }
+    //保存编辑后的文章
+    function saveEdit(obj,res){
+        db.posts.findOneAndUpdate({_id:obj._id},obj,function(err){
+            if(err){
+                console.log(err)
+                res.status(500).send()
+                return
+            }
+            res.send()
+        })
+    }
 //管理员登陆
 router.post('/api/logIn',function (req, res) {
     db.admins.findOne(req.body,function(err,doc){

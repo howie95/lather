@@ -33,9 +33,13 @@ export default {
                 let datas = response.data
                 for(let item in datas){
                     let itemdata = datas[item].months
-                    for(let item in itemdata){
-                        itemdata[item].month=this.$format("-"+itemdata[item].month,'M')
-                        itemdata[item].yuefen=month[itemdata[item].month]
+                    let i = itemdata.length
+                    while(i--){
+                        itemdata[i].month=this.$format("-"+itemdata[i].month,'M')
+                        itemdata[i].yuefen=month[itemdata[i].month]
+                        if(itemdata[i].article == 0){
+                            itemdata.splice(i,1)
+                        }
                     }
                 }
                 this.lists = datas
