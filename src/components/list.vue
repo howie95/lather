@@ -22,6 +22,7 @@
     </main>  
 </template>
 <script>
+import le from './loginevent'
 import mainFooter from './footer'
 export default {
     data(){
@@ -55,6 +56,7 @@ export default {
             if(this.list.length ==0){this.nolist = true} },
             response => console.error(response)
             )
+            le.$emit('loadend')
         }
     },
     mounted(){

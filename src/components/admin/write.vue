@@ -29,6 +29,7 @@
     </main>
 </template>
 <script>
+import le from './../loginevent'
 import mainFooter from './../footer'
 export default {
     name:'wretePost',
@@ -112,9 +113,11 @@ export default {
             },
             response => console.error("服务器异常")
             )
+            le.$emit('loadend')
             return
         }
         this.getTime()
+        le.$emit('loadend')
     },
     components:{
         mainFooter

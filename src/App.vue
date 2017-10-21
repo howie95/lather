@@ -139,7 +139,7 @@ export default {
             else if(fromname.indexOf('date')!==-1){fromname=3}
             else if(fromname.indexOf('admin')!==-1){fromname=4}
             this.routerv = toname < fromname ? 'routerleft' : 'routerright'
-
+            le.$emit('loading')
         }
     },
 }

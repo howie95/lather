@@ -18,6 +18,7 @@
     </main>  
 </template>
 <script>
+import le from './loginevent'
 import mainFooter from './footer'
 export default {
     data(){
@@ -36,6 +37,7 @@ export default {
         },
         response => console.error(response)
         )
+        le.$emit('loadend')
     },
     components:{
         mainFooter

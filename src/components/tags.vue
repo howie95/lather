@@ -17,6 +17,7 @@
     </main>
 </template>
 <script>
+import le from './loginevent'
 import mainFooter from './footer'
 export default {
     data(){
@@ -27,7 +28,8 @@ export default {
     mounted(){
         this.$http.get('/api/getTags').then(
             response => this.list = response.data,
-            response => console.error(response)
+            response => console.error(response),
+            le.$emit('loadend')
         )
     },
     components:{

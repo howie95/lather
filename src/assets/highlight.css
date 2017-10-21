@@ -5,12 +5,13 @@
   margin: 20px auto;
   background: #3a4853;
   border-radius: 10px;
-  font-size: 15px;
-  color: #DCDCDC;
+  font-size: 16px;
+  line-height: 22px;
+  color: #e9e9e9;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
 }
 .hljs code,.hljs span{
-  font-family: Clear Sans Thin, sans-serif;
+  font-family:  Verdana , sans-serif;
 }
 .hltitle {
   display: block;
@@ -29,7 +30,7 @@ code{
 .hljs-literal,
 .hljs-symbol,
 .hljs-name {
-  color: #569CD6;
+  color: #4daeff;
 }
 .hljs-link {
   color: #569CD6;
@@ -48,7 +49,7 @@ code{
 
 .hljs-string,
 .hljs-meta-string {
-  color: #D69D85;
+  color: #ff7f7f;
 }
 
 .hljs-regexp,
@@ -66,8 +67,7 @@ code{
 
 .hljs-comment,
 .hljs-quote {
-  color: #57A64A;
-  font-style: italic;
+  color: #587184;
 }
 
 .hljs-doctag {
@@ -88,7 +88,7 @@ code{
 .hljs-attr,
 .hljs-attribute,
 .hljs-builtin-name {
-  color: #9CDCFE;
+  color: #e9e384;
 }
 
 .hljs-section {

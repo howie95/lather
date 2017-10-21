@@ -40,6 +40,7 @@
     </div>
 </template>
 <script>
+import le from './loginevent'
 import mainFooter from './footer'
 export default {
     name:'blog',
@@ -76,6 +77,7 @@ export default {
             },
             response => console.error(response)
             )
+            le.$emit('loadend')
         },
         switchPage(e){
             this.start = (e==1)?true:false

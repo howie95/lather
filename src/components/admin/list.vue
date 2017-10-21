@@ -26,6 +26,7 @@
     </main>
 </template>
 <script>
+import le from './../loginevent'
 import mainFooter from './../footer'
 export default {
     data(){
@@ -62,6 +63,7 @@ export default {
                 },
             response => console.error("服务器异常")
             )
+            le.$emit('loadend')
         }
     },
     mounted(){

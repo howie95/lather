@@ -75,7 +75,11 @@
         </transition>
         <transition name="logobar">
         <div class="logobar" v-show="!welcome">
-            <div class="barcontent">
+            <transition name="loading">
+            <div class="loading" v-if="isLoading">加载中...</div>
+            </transition>
+            <transition name="loading">
+            <div class="barcontent" v-if="!isLoading">
                 <router-link to="/blog/page/1">全部博文</router-link>
                 <span>/</span>
                 <router-link to="/blog/tags/">分类索引</router-link>
@@ -88,6 +92,7 @@
                 <span v-if="islogin">/</span>
                 <router-link to="/blog/admin/list" v-if="islogin">文章管理</router-link>
             </div>
+            </transition>
         </div>
         </transition>
     </header>
@@ -97,6 +102,7 @@ import le from './loginevent'
 export default {
     data(){
         return{
+            isLoading:false,
             hover:false,
             box1c:"#243949",
             box2c:"#425d70",
@@ -150,6 +156,8 @@ export default {
     mounted(){
         le.$on('islogin',()=>{this.islogin=true})
         le.$on('islogout',()=>{this.islogin=false})
+        le.$on('loading',()=>{this.isLoading=true})
+        le.$on('loadend',()=>{this.isLoading=false})
     }
 }
 </script>
