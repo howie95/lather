@@ -52,10 +52,34 @@ const router = new Router({
     {path: '/blog/date/:year/:month', component: list},
     {path: '/blog/tags/', component: tags},
     {path: '/blog/tags/:tag', component: list},
-    {path: '/blog/admin/new', component: write},
-    {path: '/blog/admin/edit/:id', component: write},
-    {path: '/blog/admin/list', component: adminlist}
+    {path: '/blog/admin/new', component: write ,meta: { requiresAuth: true }},
+    {path: '/blog/admin/edit/:id', component: write ,meta: { requiresAuth: true }},
+    {path: '/blog/admin/list', component: adminlist ,meta: { requiresAuth: true }}
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    Axios.post('/api/checkLog').then(
+      response => {
+          let res = response.data
+          if(res.status=="0"){
+            next()
+          }else if(res.status=="2"){
+            next({
+              path: '/blog',
+            })
+          }
+      },
+      response => {
+        next({
+          path: '/blog',
+        })
+      }
+    )
+  }else{
+    next()
+  }
 })
 
 new Vue({

@@ -50,6 +50,8 @@ export default {
     mounted(){
         le.$on('islogin',()=>{
             this.islogin=true})
+        le.$on('islogout',()=>{
+            this.islogin=false})
         if (document.cookie.match("admin")){
             this.islogin=true
         }

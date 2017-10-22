@@ -121,7 +121,17 @@ export default {
             this.index=true
         }
         if (document.cookie.match("admin")){
-            le.$emit('islogin')
+            this.$http.post('/api/checkLog').then(
+                response => {
+                    let res = response.data
+                    if(res.status=="0"){
+                        le.$emit('islogin')
+                    }else if(res.status=="2"){
+                        le.$emit('islogout')
+                    }
+                },
+                response => {le.$emit('islogout')}
+            )
         }
         })
     },

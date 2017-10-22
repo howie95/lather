@@ -213,6 +213,18 @@ router.post('/api/editPost', function (req, res){
             res.send()
         })
     }
+//管理员检测
+router.post('/api/checkLog',function (req, res) {
+    if(req.session.user){
+        res.json({
+            status:"0",
+        })
+    }else{
+        res.json({
+            status:"2",
+        })
+    }
+})
 //管理员登陆
 router.post('/api/logIn',function (req, res) {
     db.admins.findOne(req.body,function(err,doc){
@@ -224,8 +236,9 @@ router.post('/api/logIn',function (req, res) {
             if(doc){
             res.cookie("admin",doc.name,{
                 path:'/',
-                maxAge:1000*60*60*2
+                maxAge:1000*60*60*24
             })
+            req.session.user = doc.name
             res.json({
                 status:"0",
                 result:{
@@ -246,6 +259,7 @@ router.post('/api/logout',function (req, res) {
       path:'/',
       maxAge:-1
     })
+    req.session.user = null
     res.json({
       status:"0"
     })
