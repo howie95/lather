@@ -93,7 +93,13 @@ export default {
             }else{
                 this.posts[e].brief = this.posts[e].briefcopy
                 this.posts[e].nobrief = "collapse"
+                this.hideMore(e)
             }
+        },
+        hideMore(e){
+            let target = document.getElementsByTagName('article')[e]
+            document.body.scrollTop = target.offsetTop + 200
+            document.documentElement.scrollTop = target.offsetTop + 200
         },
         toTop(){
             document.body.scrollTop = 0
