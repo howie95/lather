@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Axios from 'axios'
+//DATE-FNS
 import Format from 'date-fns/format'
 import zhcn from 'date-fns/locale/zh_cn'
+//markdown
 import mavonEditor from 'mavon-editor'
 import markdown from 'markdown-it'
 import hljs from 'highlight.js'
+//
 import App from './App'
 //import ti from'./components/typingit'
 

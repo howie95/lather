@@ -752,25 +752,54 @@ footer .footersd {
 }
 footer .footerbg {
     width: 100%;
-    height: 100px;
+    height: 240px;
     background-color: #e5e5e5;
 }
 footer .footerct {
     position: absolute;
-    top: 0;
+    top: 20px;
     left: 0;
     right: 0;
     width: 1000px;
     margin: 0 auto;
 }
-footer .howie{
-    width: 100px;
+footer .howie {
+    width: 500px;
+    margin: 20px 0;
+    float: left;
+}
+footer .howie svg{
+    width: 150px;
     padding-top: 10px;
 }
 footer .howie .hh{
     fill: none;
     stroke: #a0adb7;
     stroke-width: 7px;
+}
+footer .howie span {
+    position: relative;
+    top: -8px;
+    font-size: 25px;
+    color: #a0adb7;
+}
+footer .howie p,footer .howie a{
+    font-size: 15px;
+    color: #a0adb7;
+}
+footer .links {
+    position: absolute;
+    bottom: 30px;
+    right: 0;
+}
+footer .links ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 10px;
+}
+footer .links ul li a {
+    font-size: 15px;
+    color: #a0adb7;
 }
 .totop {
     cursor: pointer;
@@ -779,13 +808,18 @@ footer .howie .hh{
     bottom: 200px;
     right: 270px;
 }
+.totop svg {
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
 
 /* LOGIN */
 .login {
     display: block;
     position: fixed;
+    left: 0;
     right: 0;
-    bottom: 100px;
+    margin: 0 auto;
+    bottom: 200px;
     width: 350px;
     height: 200px;
 }
@@ -799,14 +833,33 @@ footer .howie .hh{
     overflow: hidden;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
 }
-.loginbox p {
+.loginbox .logintitle {
+    position: relative;
     display: block;
     height: 40px;
-    line-height: 40px;
+    background-color: #a0adb7;
+}
+.loginbox .logintitle p {
     margin:  0;
-    text-align: center;
-    background-color: #7490a7;
+    line-height: 40px;
     color: white;
+    text-align: center;
+}
+.loginbox .logintitle span{
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 40px;
+    width: 40px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.loginbox .logintitle span:hover{
+    background-color: rgba(0, 0, 0, 0.1);
 }
 .loginbox input {
     display: block;
@@ -823,7 +876,7 @@ footer .howie .hh{
     width: 250px;
     border: none;
     color: white;
-    background-color: #7cacd4;
+    background-color: #c4d6e5;
 }
 .logtip {
     position: absolute;

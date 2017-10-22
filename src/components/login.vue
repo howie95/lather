@@ -2,7 +2,10 @@
     <div class="login">
         <transition name="login">
         <div class="loginbox" v-if="!islogin">
-            <p>{{title}}</p>
+            <div class="logintitle" :style="{backgroundColor: this.color}">
+                <p>{{title}}</p>
+                <span @click="islogin=true">x</span>
+            </div>
             <form>
                 <input type="text" placeholder="请输入用户名" name="name" v-model="name">
                 <input type="password" placeholder="请输入密码" name="password" v-model="password">
@@ -24,7 +27,7 @@ export default {
     data(){
         return{
             title:"管理员登陆",
-            color:"#7490a7",
+            color:"#a0adb7",
             name:'',
             password:'',
             islogin:true,
