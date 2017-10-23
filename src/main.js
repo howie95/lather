@@ -67,13 +67,13 @@ router.beforeEach((to, from, next) => {
             next()
           }else if(res.status=="2"){
             next({
-              path: '/blog',
+              path: '/blog/page/1',
             })
           }
       },
       response => {
         next({
-          path: '/blog',
+          path: '/blog/page/1',
         })
       }
     )
