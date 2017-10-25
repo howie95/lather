@@ -2,10 +2,11 @@
     <main>
         <div class="maintitle write">
             <div class="maintitleh1">
-                <h1>撰写博文</h1>
+                <h1 v-if="!isPage">撰写博文</h1>
+                <h1 v-if="isPage">撰写页面</h1>
             </div>
         </div>
-        <div class="upload">
+        <div class="upload" v-if="!isPage">
             <form>
                 <h3>文章标题:</h3>
                 <input class="titleinput" type="text" name="title" v-model="title">
@@ -21,6 +22,16 @@
                 <mavon-editor :subfield="false" v-model="content"/>
                 <h3>简介:</h3>
                 <textarea class="briefinput" name="brief" v-model="brief"></textarea>
+            </form>
+            <button class="savebutton" @click="savePost">保存</button>
+            <h3>{{msg}}</h3>
+        </div>
+        <div class="upload" v-if="isPage">
+            <form>
+                <h3>页面标题:</h3>
+                <input class="titleinput" type="text" name="title" v-model="title">
+                <h3>页面内容:</h3>
+                <mavon-editor :subfield="false" v-model="content"/>
             </form>
             <button class="savebutton" @click="savePost">保存</button>
             <h3>{{msg}}</h3>
@@ -45,6 +56,7 @@ export default {
             newTag:false,
             newTagtext:"添加新分类",
             tags:[],
+            isPage:false,
         }
     },
     methods:{
@@ -115,6 +127,9 @@ export default {
             )
             le.$emit('loadend')
             return
+        }
+        if(this.$route.path.indexOf('newpage')!==-1){
+            this.isPage = true
         }
         this.getTime()
         le.$emit('loadend')

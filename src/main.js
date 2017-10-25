@@ -52,7 +52,8 @@ const router = new Router({
     {path: '/blog/date/:year/:month', component: list},
     {path: '/blog/tags/', component: tags},
     {path: '/blog/tags/:tag', component: list},
-    {path: '/blog/admin/new', component: write ,meta: { requiresAuth: true }},
+    {path: '/blog/admin/newpost', component: write ,meta: { requiresAuth: true }},
+    {path: '/blog/admin/newpage', component: write ,meta: { requiresAuth: true }},
     {path: '/blog/admin/edit/:id', component: write ,meta: { requiresAuth: true }},
     {path: '/blog/admin/list', component: adminlist ,meta: { requiresAuth: true }}
   ]

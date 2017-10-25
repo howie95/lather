@@ -88,7 +88,7 @@
                 <span>/</span>
                 <a href="javascript:;">关于我</a>
                 <span v-if="islogin">/</span>
-                <router-link to="/blog/admin/new" v-if="islogin">撰写博文</router-link>
+                <router-link to="/blog/admin/newpost" v-if="islogin">撰写博文</router-link>
                 <span v-if="islogin">/</span>
                 <router-link to="/blog/admin/list" v-if="islogin">文章管理</router-link>
             </div>

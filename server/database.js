@@ -16,6 +16,11 @@ const postSchem = new mongoose.Schema({
     content: String,
     postid: Number,
 })
+const spSchem = new mongoose.Schema({
+    title: String,
+    content: String,
+    spageid: Number,
+})
 const idsSchem = new mongoose.Schema({
     post: String,
     id: Number,
@@ -37,11 +42,12 @@ const adminUser = new mongoose.Schema({
 })
 
 const Models = {
-    posts: mongoose.model('post',postSchem),
+    posts: mongoose.model('post',postSchem,'posts'),
+    sps: mongoose.model('sp',postSchem,'singlepages'),
     ids: mongoose.model('id',idsSchem,'postids'),
     date: mongoose.model('date',dateSchem,'stat'),
-    admins: mongoose.model('admin',adminUser),
-    tags:mongoose.model('tag',tagSchem),
+    admins: mongoose.model('admin',adminUser,'admins'),
+    tags:mongoose.model('tag',tagSchem,'tags'),
 }
 
 module.exports = Models

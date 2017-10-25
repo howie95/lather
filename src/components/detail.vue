@@ -2,7 +2,7 @@
     <main>
         <div class="maintitle detail">
             <div class="maintitleh1">
-                <h1>{{item.title}}</h1>
+                <h1 class="detailh1">{{item.title}}</h1>
             </div>
         </div>
         <article class="detailcontent">
