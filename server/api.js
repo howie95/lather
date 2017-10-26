@@ -88,7 +88,6 @@ router.get('/api/getPostslist', function (req, res) {
     let page = parseInt(req.query.page)
     let pieces = parseInt(req.query.pieces)
     let skips = (page-1)*pieces
-    let getPostslist
     postslist = db.posts.find({},{brief:0,content:0}).sort({year:-1,month:-1,day:-1}).skip(skips).limit(pieces)
     postslist.exec(function (err, docs) {
         if (err) {
@@ -213,6 +212,102 @@ router.post('/api/editPost', function (req, res){
             res.send()
         })
     }
+//删除文章
+router.post('/api/delPost', function (req, res) {
+    db.posts.find({postid:req.body.id}).exec(function(err,docs){
+        db.tags.find({tag:docs[0].tag},function(err,docs){
+            docs[0].article=docs[0].article-1
+            db.tags(docs[0]).save()
+        })
+        db.date.find({year:docs[0].year,month:docs[0].month},function(err,docs){
+            docs[0].article=docs[0].article-1
+            db.date(docs[0]).save()
+        })
+        db.posts.remove({postid:req.body.id},function(err){
+            if (err) {
+                res.status(500).send()
+                return
+            }
+            res.send()
+        })
+    })
+})
+
+//保存单页
+router.post('/api/savePage', function (req, res){
+    //编辑单页
+    if(req.body._id){
+        let page = req.body
+        db.sps.findOneAndUpdate({_id:page._id},page,function(err){
+            if(err){
+                console.log(err)
+                res.status(500).send()
+                return
+            }
+            res.send()
+        })
+    }else{
+        //获取单页的ID
+        db.ids.findOneAndUpdate({"singlepage":"ids"},{$inc:{'id':1}},{new:true},function(err,docs){
+            if(err){
+                console.log(err)
+                return
+            }
+            let page = req.body
+            page.spageid = docs.id
+            new db.sps(page).save(function(err){
+                if(err){
+                    console.log(err)
+                    res.status(500).send()
+                    return
+                }
+                res.send()
+            }) 
+        })
+    }
+})
+//获取单页
+router.get('/api/getPages', function (req, res) {
+    let link = req.query.link
+    let pageid = parseInt(req.query.pageid)
+    let pages
+    if(link!=="" && link){
+        pages = db.sps.find({link:link})
+    }else if(pageid!=="" && !isNaN(pageid)){
+        pages = db.sps.find({spageid:pageid})
+    }else{
+        pages = db.sps.find({})
+    }
+    pages.exec(function (err, docs) {
+        if (err) {
+          console.error(err)
+          return
+        }
+        res.json(docs)
+    })
+})
+//获取单页列表
+router.get('/api/getPageslist', function (req, res) {
+    pageslist = db.sps.find({},{content:0})
+    pageslist.exec(function (err, docs) {
+        if (err) {
+          console.error(err)
+          return
+        }
+        res.json(docs)
+    })
+})
+//删除单页
+router.post('/api/delPage', function (req, res) {
+    db.sps.remove({spageid:req.body.id},function(err){
+        if (err) {
+            res.status(500).send()
+            return
+        }
+        res.send()
+    })
+})
+
 //管理员检测
 router.post('/api/checkLog',function (req, res) {
     if(req.session.user){

@@ -19,6 +19,7 @@ const postSchem = new mongoose.Schema({
 const spSchem = new mongoose.Schema({
     title: String,
     content: String,
+    link: String,
     spageid: Number,
 })
 const idsSchem = new mongoose.Schema({
@@ -43,7 +44,7 @@ const adminUser = new mongoose.Schema({
 
 const Models = {
     posts: mongoose.model('post',postSchem,'posts'),
-    sps: mongoose.model('sp',postSchem,'singlepages'),
+    sps: mongoose.model('sp',spSchem,'singlepages'),
     ids: mongoose.model('id',idsSchem,'postids'),
     date: mongoose.model('date',dateSchem,'stat'),
     admins: mongoose.model('admin',adminUser,'admins'),

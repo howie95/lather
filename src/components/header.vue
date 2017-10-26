@@ -88,13 +88,27 @@
                 <span>/</span>
                 <a href="javascript:;">关于我</a>
                 <span v-if="islogin">/</span>
-                <router-link to="/blog/admin/newpost" v-if="islogin">撰写博文</router-link>
+                <router-link to="/blog/admin/newpost" v-if="islogin">撰写 &or;</router-link>
                 <span v-if="islogin">/</span>
-                <router-link to="/blog/admin/list" v-if="islogin">文章管理</router-link>
+                <router-link to="/blog/admin/postlist" v-if="islogin">管理 &or;</router-link>
             </div>
             </transition>
         </div>
         </transition>
+        <div class="extramenu">
+            <div>
+                <ul>
+                    <li><router-link to="/blog/admin/newpost" v-if="islogin">撰写博文</router-link></li>
+                    <li><router-link to="/blog/admin/newpage" v-if="islogin">撰写单页</router-link></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li><router-link to="/blog/admin/postlist" v-if="islogin">文章管理</router-link></li>
+                    <li><router-link to="/blog/admin/pagelist" v-if="islogin">单页管理</router-link></li>
+                </ul>
+            </div>
+        </div>
     </header>
 </template>
 <script>

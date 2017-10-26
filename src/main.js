@@ -55,7 +55,11 @@ const router = new Router({
     {path: '/blog/admin/newpost', component: write ,meta: { requiresAuth: true }},
     {path: '/blog/admin/newpage', component: write ,meta: { requiresAuth: true }},
     {path: '/blog/admin/edit/:id', component: write ,meta: { requiresAuth: true }},
-    {path: '/blog/admin/list', component: adminlist ,meta: { requiresAuth: true }}
+    {path: '/blog/admin/edit/page/:pageid', component: write ,meta: { requiresAuth: true }},
+    {path: '/blog/admin/postlist', component: adminlist ,meta: { requiresAuth: true }},
+    {path: '/blog/admin/postlist/:page', component: adminlist ,meta: { requiresAuth: true }},
+    {path: '/blog/admin/pagelist', component: adminlist ,meta: { requiresAuth: true }},
+    {path: '/blog/:pagelink', component: detail},
   ]
 })
 

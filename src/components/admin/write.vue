@@ -3,7 +3,7 @@
         <div class="maintitle write">
             <div class="maintitleh1">
                 <h1 v-if="!isPage">撰写博文</h1>
-                <h1 v-if="isPage">撰写页面</h1>
+                <h1 v-if="isPage">撰写单页</h1>
             </div>
         </div>
         <div class="upload" v-if="!isPage">
@@ -28,12 +28,14 @@
         </div>
         <div class="upload" v-if="isPage">
             <form>
-                <h3>页面标题:</h3>
+                <h3>单页标题:</h3>
                 <input class="titleinput" type="text" name="title" v-model="title">
-                <h3>页面内容:</h3>
+                <h3>单页内容:</h3>
                 <mavon-editor :subfield="false" v-model="content"/>
+                <h3>单页地址:</h3>
+                <span class="linkspan">https://博客的地址/</span><input class="linkinput" type="text" name="link" v-model="link">
             </form>
-            <button class="savebutton" @click="savePost">保存</button>
+            <button class="savebutton" @click="savePage">保存</button>
             <h3>{{msg}}</h3>
         </div>
         <main-footer></main-footer>
@@ -57,6 +59,7 @@ export default {
             newTagtext:"添加新分类",
             tags:[],
             isPage:false,
+            link:'',
         }
     },
     methods:{
@@ -98,6 +101,33 @@ export default {
                 )
             }
         },
+        savePage:function(){
+            let obj = {
+                title: this.title,
+                content: this.content,
+                link:this.link,
+            }
+            if(this.$route.params.pageid){
+                obj._id = this.dbid
+                this.$http.post('/api/savePage',obj).then(
+                    response => {
+                    this.msg = "保存成功！"
+                    },
+                    response => {
+                    this.msg = "保存失败！"
+                    }
+                )
+            }else{
+                this.$http.post('/api/savePage',obj).then(
+                    response => {
+                    this.msg = "保存成功！"
+                    },
+                    response => {
+                    this.msg = "保存失败！"
+                    }
+                )
+            }
+        },
         getTime:function(){
             let now = this.$format(new Date(),'YYYY-MM-DDTHH:mm')
             this.date = now
@@ -128,6 +158,21 @@ export default {
             le.$emit('loadend')
             return
         }
+        if(this.$route.params.pageid){
+            this.isPage = true
+            let param = {pageid:this.$route.params.pageid}
+            this.$http.get('/api/getPages',{params:param}).then(
+            response => {
+                this.title = response.data[0].title
+                this.content = response.data[0].content
+                this.dbid = response.data[0]._id
+                this.link = response.data[0].link
+            },
+            response => console.error("服务器异常")
+            )
+            le.$emit('loadend')
+            return
+        }
         if(this.$route.path.indexOf('newpage')!==-1){
             this.isPage = true
         }
@@ -136,6 +181,11 @@ export default {
     },
     components:{
         mainFooter
+    },
+    watch: {
+        '$route' (to, from) {
+            this.$router.go(0)
+        }
     },
 }
 </script>

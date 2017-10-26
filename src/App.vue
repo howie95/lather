@@ -5,7 +5,7 @@
         <router-view :welcome="welcome" @routerchange="smoothTop"></router-view>
         </transition>
         <transition name="login">
-        <login></login>
+        <login v-if="!index"></login>
         </transition>
         <transition name="login">
         <span @click="smoothTop" class="totop" v-if="!istop">
@@ -116,9 +116,6 @@ export default {
             document.addEventListener('DOMMouseScroll',this.isTop) 
             }//Firefox 
             window.onmousewheel=document.onmousewheel=this.isTop
-        }
-        if(this.$route.fullPath=="/"||this.$route.fullPath==""){
-            this.index=true
         }
         if (document.cookie.match("admin")){
             this.$http.post('/api/checkLog').then(
