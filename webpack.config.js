@@ -2,11 +2,14 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    app:path.resolve(__dirname,'src/main.js'),
+    vue:['vue'],
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js'
+    filename: 'build[name].js',
   },
   module: {
     rules: [
@@ -26,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader?name=fonts/[name].[md5:hash:hex:7].[ext]',
+        loader: 'file-loader?name=fonts/[name].[md5:hash:hex:7].[ext]',
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -75,6 +78,11 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name:['vue'],
+      filename:'vendor.[name].js',
+      chunks:4
     })
   ])
 }

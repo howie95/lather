@@ -44,6 +44,7 @@
 <script>
 import le from './../loginevent'
 import mainFooter from './../footer'
+import mainFooter from './../footer'
 export default {
     name:'wretePost',
     data(){
@@ -180,7 +181,8 @@ export default {
         le.$emit('loadend')
     },
     components:{
-        mainFooter
+        mainFooter,
+        mavonEditor
     },
     watch: {
         '$route' (to, from) {

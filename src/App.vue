@@ -105,31 +105,34 @@ export default {
     },
     mounted(){
         this.$nextTick(function () {
-        if(this.$route.fullPath=="/blog"||this.$route.fullPath=="/blog/"){
-            this.welcome=true
-            if(document.addEventListener){  
-            document.addEventListener('DOMMouseScroll',this.onScroll) 
-            }//Firefox 
-            window.onmousewheel=document.onmousewheel=this.onScroll
-        }else{
-            if(document.addEventListener){  
-            document.addEventListener('DOMMouseScroll',this.isTop) 
-            }//Firefox 
-            window.onmousewheel=document.onmousewheel=this.isTop
-        }
-        if (document.cookie.match("admin")){
-            this.$http.post('/api/checkLog').then(
-                response => {
-                    let res = response.data
-                    if(res.status=="0"){
-                        le.$emit('islogin')
-                    }else if(res.status=="2"){
-                        le.$emit('islogout')
+            setTimeout(()=> {
+                    if(this.$route.fullPath == '/'){this.index = true} 
+                    if(this.$route.fullPath=="/blog"||this.$route.fullPath=="/blog/"){
+                        this.welcome=true
+                        if(document.addEventListener){  
+                        document.addEventListener('DOMMouseScroll',this.onScroll) 
+                        }//Firefox 
+                        window.onmousewheel=document.onmousewheel=this.onScroll
+                    }else{
+                        if(document.addEventListener){  
+                        document.addEventListener('DOMMouseScroll',this.isTop) 
+                        }//Firefox 
+                        window.onmousewheel=document.onmousewheel=this.isTop
                     }
-                },
-                response => {le.$emit('islogout')}
-            )
-        }
+                    } , 50)
+            if (document.cookie.match("admin")){
+                this.$http.post('/api/checkLog').then(
+                    response => {
+                        let res = response.data
+                        if(res.status=="0"){
+                            le.$emit('islogin')
+                        }else if(res.status=="2"){
+                            le.$emit('islogout')
+                        }
+                    },
+                    response => {le.$emit('islogout')}
+                )
+            }
         })
     },
     watch: {

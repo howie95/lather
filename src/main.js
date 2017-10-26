@@ -5,7 +5,6 @@ import Axios from 'axios'
 import Format from 'date-fns/format'
 import zhcn from 'date-fns/locale/zh_cn'
 //markdown
-import mavonEditor from 'mavon-editor'
 import markdown from 'markdown-it'
 import hljs from 'highlight.js'
 //
@@ -23,7 +22,6 @@ import adminlist from './components/admin/list'
 
 //Vue.use(ti)
 Vue.use(Router)
-Vue.use(mavonEditor)
 Vue.prototype.$http = Axios
 Vue.prototype.$format = Format
 Vue.prototype.$zhcn = zhcn
@@ -43,23 +41,108 @@ Vue.prototype.$md = new markdown({
 const router = new Router({
   mode: 'history',
   routes: [
-    //{path: '/', component: index},
-    {path: '/blog/', component: posts},
-    {path: '/blog/page/:page',name:'page', component: posts},
-    {path: '/blog/post/:id', component: detail},
-    {path: '/blog/date/', component: date},
-    {path: '/blog/date/:year', component: list},
-    {path: '/blog/date/:year/:month', component: list},
-    {path: '/blog/tags/', component: tags},
-    {path: '/blog/tags/:tag', component: list},
-    {path: '/blog/admin/newpost', component: write ,meta: { requiresAuth: true }},
-    {path: '/blog/admin/newpage', component: write ,meta: { requiresAuth: true }},
-    {path: '/blog/admin/edit/:id', component: write ,meta: { requiresAuth: true }},
-    {path: '/blog/admin/edit/page/:pageid', component: write ,meta: { requiresAuth: true }},
-    {path: '/blog/admin/postlist', component: adminlist ,meta: { requiresAuth: true }},
-    {path: '/blog/admin/postlist/:page', component: adminlist ,meta: { requiresAuth: true }},
-    {path: '/blog/admin/pagelist', component: adminlist ,meta: { requiresAuth: true }},
-    {path: '/blog/:pagelink', component: detail},
+    {
+      path: '/', 
+      component: function(resolve){
+        require(['./components/index'],resolve)
+      }
+    },
+    {
+      path: '/blog/', 
+      component: function(resolve){
+        require(['./components/posts'],resolve)
+      }
+    },
+    {
+      path: '/blog/page/:page',name:'page', 
+      component: function(resolve){
+        require(['./components/posts'],resolve)
+      }
+    },
+    {
+      path: '/blog/post/:id', 
+      component: function(resolve){
+        require(['./components/detail'],resolve)
+      }
+    },
+    {
+      path: '/blog/date/', 
+      component: function(resolve){
+        require(['./components/date'],resolve)
+      }
+    },
+    {
+      path: '/blog/date/:year', 
+      component: function(resolve){
+        require(['./components/list'],resolve)
+      }
+    },
+    {
+      path: '/blog/date/:year/:month', 
+      component: function(resolve){
+        require(['./components/list'],resolve)
+      }
+    },
+    {
+      path: '/blog/tags/', 
+      component: function(resolve){
+        require(['./components/tags'],resolve)
+      }
+    },
+    {
+      path: '/blog/tags/:tag', 
+      component: function(resolve){
+        require(['./components/list'],resolve)
+      }
+    },
+    {
+      path: '/blog/admin/newpost', 
+      component: function(resolve){
+        require(['./components/admin/write'],resolve)
+      } ,
+      meta: { requiresAuth: true }},
+    {
+      path: '/blog/admin/newpage', 
+      component: function(resolve){
+        require(['./components/admin/write'],resolve)
+      } ,
+      meta: { requiresAuth: true }},
+    {
+      path: '/blog/admin/edit/:id', 
+      component: function(resolve){
+        require(['./components/admin/write'],resolve)
+      } ,
+      meta: { requiresAuth: true }},
+    {
+      path: '/blog/admin/edit/page/:pageid', 
+      component: function(resolve){
+        require(['./components/admin/write'],resolve)
+      } ,
+      meta: { requiresAuth: true }},
+    {
+      path: '/blog/admin/postlist', 
+      component: function(resolve){
+        require(['./components/admin/list'],resolve)
+      } ,
+      meta: { requiresAuth: true }},
+    {
+      path: '/blog/admin/postlist/:page', 
+      component: function(resolve){
+        require(['./components/admin/list'],resolve)
+      } ,
+      meta: { requiresAuth: true }},
+    {
+      path: '/blog/admin/pagelist', 
+      component: function(resolve){
+        require(['./components/admin/list'],resolve)
+      } ,
+      meta: { requiresAuth: true }},
+    {
+      path: '/blog/:pagelink', 
+      component: function(resolve){
+        require(['./components/detail'],resolve)
+      }
+    },
   ]
 })
 
