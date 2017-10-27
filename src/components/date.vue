@@ -44,10 +44,11 @@ export default {
                     }
                 }
                 this.lists = datas
+                setTimeout(()=>{le.$emit('loadend')},1000)
             },
             response => console.error(response)
         )
-        le.$emit('loadend')
+        document.title = "日期归档 - Howie's Blog."
     },
     components:{
         mainFooter

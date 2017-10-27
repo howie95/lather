@@ -49,7 +49,7 @@
                 <nav>
                     <a @click="checkNav('tag')" @mouseenter="hoverNav('tag')" @mouseout="unhoverNav">分类索引</a>
                     <span>/</span>
-                    <a @click="checkNav('date')" @mouseenter="hoverNav('date')" @mouseout="unhoverNav">日期索引</a>
+                    <a @click="checkNav('date')" @mouseenter="hoverNav('date')" @mouseout="unhoverNav">日期归档</a>
                     <span>/</span>
                     <a href="javascript:;">关于我</a>
                 </nav>  
@@ -84,7 +84,7 @@
                 <span>/</span>
                 <router-link to="/blog/tags/">分类索引</router-link>
                 <span>/</span>
-                <router-link to="/blog/date/">日期索引</router-link>
+                <router-link to="/blog/date/">日期归档</router-link>
                 <span>/</span>
                 <a href="javascript:;">关于我</a>
                 <span v-if="islogin">/</span>

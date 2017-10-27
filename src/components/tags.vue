@@ -29,8 +29,9 @@ export default {
         this.$http.get('/api/getTags').then(
             response => this.list = response.data,
             response => console.error(response),
-            le.$emit('loadend')
+            setTimeout(()=>{le.$emit('loadend')},1000)
         )
+        document.title = "分类索引 - Howie's Blog."
     },
     components:{
         mainFooter

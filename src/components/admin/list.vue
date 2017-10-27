@@ -86,10 +86,10 @@ export default {
                     this.list[item].time = this.$format("1111-11-11T"+this.list[item].time,'Ahh:mm',{locale: this.$zhcn})
                     this.list[item].id = this.list[item].postid
                 }
+                setTimeout(()=>{le.$emit('loadend')},1000)
                 },
             response => console.error("服务器异常")
             )
-            le.$emit('loadend')
         }
     },
     mounted(){

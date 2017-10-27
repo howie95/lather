@@ -74,10 +74,10 @@ export default {
                     this.posts[item].nobrief = "true"
                 }else{this.posts[item].nobrief = "collapse"}
             }
+            setTimeout(()=>{le.$emit('loadend')},1000)
             },
             response => console.error(response)
             )
-            le.$emit('loadend')
         },
         switchPage(e){
             this.start = (e==1)?true:false

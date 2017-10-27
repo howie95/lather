@@ -36,6 +36,8 @@ export default {
             response => {
                 this.item = response.data[0]
                 this.item.content = this.$md.render(this.item.content)
+                document.title = this.item.title + " - Howie's Blog."
+                setTimeout(()=>{le.$emit('loadend')},1000)
             },
             response => console.error(response)
             )
@@ -47,11 +49,12 @@ export default {
                 this.item = response.data[0]
                 this.item.content = this.$md.render(this.item.content)
                 this.item.time = this.$format("1111-11-11T"+this.item.time,'Ahh:mm',{locale: this.$zhcn})
+                document.title = this.item.title + " - Howie's Blog."
+                setTimeout(()=>{le.$emit('loadend')},1000)
             },
             response => console.error(response)
             )
         }
-        le.$emit('loadend')
     },
     components:{
         mainFooter
