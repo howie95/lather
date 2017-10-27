@@ -53,10 +53,10 @@ export default {
             this.h2=month+"月"}
             this.$http.get('/api/getList',{params:param}).then(
             response => {this.list = response.data
-            if(this.list.length ==0){this.nolist = true} },
+            if(this.list.length ==0){this.nolist = true}
+            setTimeout(()=>{le.$emit('loadend')},1000) },
             response => console.error(response)
             )
-            le.$emit('loadend')
         }
     },
     mounted(){
