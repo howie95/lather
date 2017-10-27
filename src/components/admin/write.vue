@@ -44,7 +44,7 @@
 <script>
 import le from './../loginevent'
 import mainFooter from './../footer'
-import mainFooter from './../footer'
+import { mavonEditor } from 'mavon-editor'
 export default {
     name:'wretePost',
     data(){

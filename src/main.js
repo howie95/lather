@@ -9,18 +9,7 @@ import markdown from 'markdown-it'
 import hljs from 'highlight.js'
 //
 import App from './App'
-//import ti from'./components/typingit'
 
-//import index from './components/index'
-import posts from './components/posts'
-import list from './components/list'
-import detail from './components/detail'
-import date from './components/date'
-import tags from './components/tags'
-import write from './components/admin/write'
-import adminlist from './components/admin/list'
-
-//Vue.use(ti)
 Vue.use(Router)
 Vue.prototype.$http = Axios
 Vue.prototype.$format = Format
@@ -41,12 +30,6 @@ Vue.prototype.$md = new markdown({
 const router = new Router({
   mode: 'history',
   routes: [
-    {
-      path: '/', 
-      component: function(resolve){
-        require(['./components/index'],resolve)
-      }
-    },
     {
       path: '/blog/', 
       component: function(resolve){

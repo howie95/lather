@@ -5,9 +5,9 @@
   margin: 20px auto;
   background: #d5d6ff;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 22px;
-  color: #767676;
+  color: #607682;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
 }
 .hljs code,.hljs span{
@@ -31,7 +31,7 @@ code{
 .hljs-literal,
 .hljs-symbol,
 .hljs-name {
-  color: #2334c4;
+  color: #5965ca;
 }
 .hljs-link {
   color: #569CD6;
@@ -40,7 +40,7 @@ code{
 
 .hljs-built_in,
 .hljs-type {
-  color: #1eb025;
+  color: #44c24a;
 }
 
 .hljs-number,
@@ -89,7 +89,7 @@ code{
 .hljs-attr,
 .hljs-attribute,
 .hljs-builtin-name {
-  color: #e9e384;
+  color: #a93434;
 }
 
 .hljs-section {
