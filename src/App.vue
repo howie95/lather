@@ -119,7 +119,7 @@ export default {
                         }//Firefox 
                         window.onmousewheel=document.onmousewheel=this.isTop
                     }
-                    } , 50)
+                    } , 20)
             if (document.cookie.match("admin")){
                 this.$http.post('/api/checkLog').then(
                     response => {

@@ -57,6 +57,7 @@ export default {
             setTimeout(()=>{le.$emit('loadend')},1000) },
             response => console.error(response)
             )
+            document.title = this.h1+this.h2+" - 索引列表 - Howie's Blog."
         }
     },
     mounted(){

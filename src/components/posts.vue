@@ -78,6 +78,7 @@ export default {
             },
             response => console.error(response)
             )
+            document.title = "第"+this.page+"页 - 全部博文 - Howie's Blog."
         },
         switchPage(e){
             this.start = (e==1)?true:false
