@@ -115,11 +115,11 @@ export default {
                         window.onmousewheel=document.onmousewheel=this.onScroll
                     }else{
                         if(document.addEventListener){  
-                        document.addEventListener('DOMMouseScroll',this.isTop) 
+                        document.addEventListener('scroll',this.isTop) 
                         }//Firefox 
-                        window.onmousewheel=document.onmousewheel=this.isTop
+                        window.onscroll=document.onscroll=this.isTop
                     }
-                    } , 20)
+                    } , 50)
             if (document.cookie.match("admin")){
                 this.$http.post('/api/checkLog').then(
                     response => {
